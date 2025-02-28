@@ -5,5 +5,12 @@
     </head>
     <body>
         Home Page
+        {% if request.user.is_authenticated %}
+            <h3>Welcome {{request.user}}</h3>
+        {% endif %}
+        <form action="/accounts/logout/" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
     </body>
 </html>

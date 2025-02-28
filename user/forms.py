@@ -22,3 +22,17 @@ class RegistrationForm(forms.Form):
         widget=forms.PasswordInput,
         help_text='Re-enter the password'
     )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get('password')
+        password2 = cleaned_data.get('password2')
+
+        if password != password2:
+            raise ValidationError('Passwords do not match')
+        return cleaned_data
+    
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
