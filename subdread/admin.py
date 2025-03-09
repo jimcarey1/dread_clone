@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import SubDread
+from .models import SubDread, Category, Flair
 # Register your models here.
 
 admin.site.register(SubDread)
+admin.site.register(Category)
+admin.site.register(Flair)
