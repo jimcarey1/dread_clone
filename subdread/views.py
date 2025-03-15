@@ -12,20 +12,35 @@ def create_community(request:HttpRequest):
     if request.method == 'POST':
         form = SubDreadForm(request.POST)
         if form.is_valid():
-            subdread:SubDread = form.save(commit=False)
-            subdread.creator = request.user
+            data = form.cleaned_data
+
+            subdread = SubDread(
+                name = data.get('name'),
+                description = data.get('description'),
+                type = data.get('type'),
+                adults_only = data.get('adults_only'),
+                banner = data.get('banner'),
+                icon = data.get('icon'),
+            )
             subdread.save()
+            subdread.creator = request.user
             subdread.users.add(request.user)
             subdread.moderators.add(request.user)
+
+            for category in data.get('categories'):
+                subdread.categories.add(category)
+
             return redirect('home_url')
         return render(request, 'subdread/create_community.html', {'form':form})
     else:
         form = SubDreadForm()
         return render(request, 'subdread/create_community.html', {'form':form})
 
+
 def subdread_list(request:HttpRequest):
     subdreads = SubDread.objects.all()
     return render(request, 'subdread/subdread_list.html', {'subdreads':subdreads})
+
 
 def subdread_detail(request:HttpRequest, subdread_id:int):
     subdread = get_object_or_404(SubDread, id=subdread_id)

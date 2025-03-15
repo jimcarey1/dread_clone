@@ -21,21 +21,102 @@
             <i class="bi bi-chat-dots"></i>
             <div class="create-post">
                 <i class="bi bi-plus"></i>
-                <h4>Create</h4>
+                <p>Create</p>
             </div>
             <i class="bi bi-bell"></i>
             <i class="bi bi-person-circle"></i>
         </div>
     </div>
 
-    <div class="sidebar">
-        <div class="sidebar-item">
-            <i class="bi bi-house-door"></i>
-            <p>Home</p>
+    <div class="page-layout">
+        <div class="sidebar">
+            <div class="post-filters">
+                <div class="sidebar-item">
+                    <a href="#">
+                        <i class="bi bi-house-door-fill"></i>
+                        <p>Home</p>
+                    </a>
+                </div>
+                <div class="sidebar-item">
+                    <a href="#">
+                        <i class="bi bi-arrow-up-right-circle"></i>
+                        <p>Popular</p>
+                    </a>
+                </div>
+                <div class="sidebar-item">
+                    <a href="#">
+                        <i class="bi bi-globe"></i>
+                        <p>Explore</p>
+                    </a>
+                </div>
+                <div class="sidebar-item">
+                    <a href="#">
+                        <i class="bi bi-globe"></i>
+                        <p>All</p>
+                    </a>
+                </div>
+
+                {% if request.user.is_authenticated %}
+                <div class="community">
+                    <p>COMMUNITY</p>
+                    <div id="create-community-id" class="create-community" onclick="handleCreateCommunity()">
+                        <form method="post">
+                            <a href="#">
+                                <i class="bi bi-plus-lg"></i>
+                                <p>Create a community</p>
+                            </a>
+                        </form>
+                    </div>
+                    <div class="your-communities">
+                    </div>
+                </div>
+                {% else %}
+                <div class="topics">
+
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="resources">
+                <div class="dread-resource">
+                    <i class="bi bi-reddit"></i>
+                    <p>About Dread</p>
+                </div>
+                <div class="dread-resource">
+                    <i class="bi bi-badge-ad"></i>
+                    <p>Advertise</p>
+                </div>
+                <div class="dread-resource">
+                    <i class="bi bi-reddit"></i>
+                    <p>Dread Pro</p>
+                </div>
+                <div class="dread-resource">
+                    <i class="bi bi-question-circle"></i>
+                    <p>Help</p>
+                </div>
+                <div class="dread-resource">
+                    <i class="bi bi-book"></i>
+                    <p>Blog</p>
+                </div>
+                <div class="dread-resource">
+                    <i class="bi bi-wrench-adjustable"></i>
+                    <p>Careers</p>
+                </div>
+                <div class="dread-resource">
+                    <i class="bi bi-brilliance"></i>
+                    <p>Press</p>
+                </div>
+            </div>
         </div>
-        <div class="sidebar-item"></div>
-        <div class="sidebar-item"></div>
-        <div class="sidebar-item"></div>
+
+        {% block content1 %}
+        {% endblock %}
+
+        {% block content2 %}
+        {% endblock %}  
+        </div>
     </div>
+    <script src="{% static 'js/html_generator.js' %}"></script>
+    <script src="{% static 'js/create_community.js' %}"></script>
 </body>
 </html>

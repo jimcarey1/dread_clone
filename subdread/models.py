@@ -19,9 +19,17 @@ class Category(models.Model):
         return Category.objects.get(id=id).parent
 
 class SubDread(models.Model):
+    TYPE_CHOICES = (
+        ('0', 'Private'),
+        ('1', 'Public'),
+    )
     creator = models.OneToOneField(User, related_name='dread', on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=50, unique=True)
     description = models.TextField()
+    type = models.CharField(max_length=1, choices=TYPE_CHOICES)
+    adults_only = models.BooleanField(default=False, blank=False)
+    banner = models.ImageField(upload_to='banner', null=True, blank=True)
+    icon = models.ImageField(upload_to='icon', null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     users = models.ManyToManyField(User, related_name='subdreads')
     moderators = models.ManyToManyField(User, related_name='moderated_subdreads')

@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Home Page</title>
-    </head>
-    <body>
-        Home Page
-        {% if request.user.is_authenticated %}
-            <h3>Welcome {{request.user}}</h3>
-        {% endif %}
-        <form action="/accounts/logout/" method="post">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-    </body>
-</html>
+{% extends 'layout/index.html' %}
+
+{% block content1 %}
+<div class="post-list">
+    <p>It will display list of posts</p>
+</div>
+{% endblock %}
+
+{% block content2 %}
+<div class="recent-posts">
+    <p>It will display recent-posts</p>
+</div>
+{% endblock %}

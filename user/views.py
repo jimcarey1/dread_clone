@@ -8,7 +8,7 @@ from .forms import RegistrationForm, LoginForm
 from .models import User
 
 def home_view(request:HttpRequest):
-    return render(request, 'layout/index.html')
+    return render(request, 'user/index.html')
 
 
 def registration_view(request:HttpRequest):
