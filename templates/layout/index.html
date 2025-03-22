@@ -68,6 +68,9 @@
                         </form>
                     </div>
                     <div class="your-communities">
+                        {% for subreddit in joined_subreddits %}
+                           {{ subreddit.name }}
+                        {% endfor %}
                     </div>
                 </div>
                 {% else %}
@@ -116,7 +119,5 @@
         {% endblock %}  
         </div>
     </div>
-    <script src="{% static 'js/html_generator.js' %}"></script>
-    <script src="{% static 'js/create_community.js' %}"></script>
 </body>
 </html>

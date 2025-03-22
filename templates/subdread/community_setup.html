@@ -1,0 +1,29 @@
+{% extends 'layout/index.html' %}
+{% block content1 %}
+<div class="community-setup">
+    <div class="community-details">
+        <div class="banner">
+            <img src="{{subdread.banner.url }}" width="100" height="100" alt="{{subdread.name}}">
+        </div>
+        <div class="icon">
+            <img src="{{subdread.icon.url }}" alt="{{subdread.name}}">
+        </div>
+        <div class="details">
+            <p>Community Details</p>
+        </div>
+    </div>
+{% endblock content1 %}
+
+{% block content2 %}
+    <div class="community-actions">
+        <div class="posts-banners">
+            <p>Add icon and banner, if not  added.</p>
+            <p>Create three posts</p>
+        </div>
+        <div class="community-settings">
+            <p>{{subdread.name}}</p>
+            <p>Add community guide.</p>
+        </div>
+    </div>
+</div>
+{%endblock content2 %}

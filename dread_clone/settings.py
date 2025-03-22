@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'user',
     'post',
     'subdread',
+
+    'froala_editor',
 ]
 
 MIDDLEWARE = [
@@ -123,7 +125,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR/'static']
 STATIC_ROOT = BASE_DIR/'static_collection'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR/'media'
 
 # Default primary key field type
@@ -137,3 +139,10 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = None
 
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+FROALA_EDITOR_PLUGINS = (
+    'align', 'colors', 'draggable', 
+    'entities', 'font_family', 'font_size', 'fullscreen', 'inline_style',
+    'line_breaker', 'link', 'lists', 'paragraph_format', 'paragraph_style', 
+    'quick_insert', 'quote', 'save', 'url'
+    )  

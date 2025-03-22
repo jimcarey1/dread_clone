@@ -1,3 +1,4 @@
+from typing import Dict, Any
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.contrib.auth import authenticate, login, logout
@@ -7,8 +8,19 @@ from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, LoginForm
 from .models import User
 
+@login_required
 def home_view(request:HttpRequest):
-    return render(request, 'user/index.html')
+    data: Dict[str, Any] = dict()
+    data['joined_subreddits'] = request.user.subdreads.all()
+    try:
+        data['created_subreddit'] = request.user.dread
+    except:
+        pass 
+    finally:
+        return render(
+            request, 
+            'user/index.html', 
+            data)
 
 
 def registration_view(request:HttpRequest):
@@ -37,7 +49,8 @@ def login_view(request:HttpRequest):
     else:
         form = LoginForm()
         return render(request, 'user/login.html', {'form':form})
-    
+
+@login_required
 def logout_view(request:HttpRequest):
     logout(request)
     return redirect('user_login_url')
@@ -45,5 +58,4 @@ def logout_view(request:HttpRequest):
 @login_required(redirect_field_name='next')
 def profile_view(request:HttpRequest):
     user = request.user
-    print(user.username, user.last_login)
     return render(request, 'user/profile.html', {'user':user})

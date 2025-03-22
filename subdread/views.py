@@ -1,6 +1,9 @@
+from ast import Sub
+from os import name
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
 
 from .forms import SubDreadForm
@@ -21,21 +24,25 @@ def create_community(request:HttpRequest):
                 adults_only = data.get('adults_only'),
                 banner = data.get('banner'),
                 icon = data.get('icon'),
+                creator = request.user
             )
+
             subdread.save()
-            subdread.creator = request.user
             subdread.users.add(request.user)
             subdread.moderators.add(request.user)
+            subdread.categories.add(*data.get('categories'))
 
-            for category in data.get('categories'):
-                subdread.categories.add(category)
-
-            return redirect('home_url')
+            return redirect('community_setup_url', subdread = subdread.name)
         return render(request, 'subdread/create_community.html', {'form':form})
     else:
         form = SubDreadForm()
         return render(request, 'subdread/create_community.html', {'form':form})
+        
 
+@login_required
+def community_setup(request:HttpRequest, subdread:str):
+    subdread:SubDread = SubDread.objects.get(name=subdread)
+    return render(request, 'subdread/community_setup.html', {'subdread':subdread})
 
 def subdread_list(request:HttpRequest):
     subdreads = SubDread.objects.all()
@@ -74,4 +81,3 @@ def delete_subdread(request:HttpRequest, subdread_id:int):
         subdread.delete()
         return redirect('home_url')
     return render(request, 'subdread/subdread_confirm_delete.html', {'subdread': subdread})
-        
