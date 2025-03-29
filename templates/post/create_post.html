@@ -7,7 +7,7 @@
     {{form.media}}
 </head>
 <body>
-    <form method="post">
+    <form method="post" autocomplete="off">
         {% csrf_token %}
         {{form}}
         <button type="submit">Create Post</button>

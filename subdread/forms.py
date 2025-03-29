@@ -8,4 +8,4 @@ class SubDreadForm(forms.ModelForm):
         widget = forms.CheckboxSelectMultiple)
     class Meta:
         model = SubDread
-        fields = ['name', 'description', 'type', 'adults_only', 'banner', 'icon', 'categories']
+        fields = ['name', 'description', 'type', 'adults_only', 'categories']
