@@ -24,7 +24,7 @@ const addwidgethtml = `
 
         <div class="modal-footer">
             <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
-            <button class="btn btn-save">Save</button>
+            <button class="btn btn-save" onclick="saveAndRedirect()">Save</button>
         </div>
     </div>
 </div>
@@ -34,7 +34,7 @@ const editWidgetBtn = document.getElementById('edit-widget-button');
 
 
 function openModal() {
-    const container = document.querySelector('div.modal-container')
+    const container = document.getElementById('modal-container')
     const modalElement = document.createElement('div');
     modalElement.innerHTML = addwidgethtml;
     container.appendChild(modalElement);
@@ -51,3 +51,13 @@ function closeModal() {
 }
 
 editWidgetBtn.addEventListener('click', openModal);
+
+function saveAndRedirect() {
+    const selectElement = document.querySelector('select[name="addwidget"]');
+    const optionValue = selectElement.value;
+    const communityName = document.getElementById('modal-container').dataset.communityName
+
+    if (optionValue) {
+        window.location.href = `http://localhost:8000/d/mod/${communityName}/${optionValue}`;
+    }
+}

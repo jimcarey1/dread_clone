@@ -7,7 +7,7 @@
             <p>Exit mod tools</p>
         </div>
         <div class="select-community">
-            <p>{{community.name}}</p>
+            <p><b>{{subdread.name}}</b></p>
         </div>
         <div class="search-tools">
             <p>Search Tools</p>
@@ -15,6 +15,7 @@
     </div>
 
     <div class="overview">
+        <p><b>OVERVIEW</b></p>
         <div class="queues">
             <i class="bi bi-bookmarks"></i>
             <p>Queues</p>
@@ -42,6 +43,7 @@
     </div>
 
     <div class="moderation">
+        <p><b>MODERATION</b></p>
         <div class="rules">
             <i class="bi bi-journal"></i>
             <p>Rules</p>
@@ -69,6 +71,7 @@
     </div>
 
     <div class="content">
+        <p><b>CONTENT</b></p>
         <div class="wiki">
             <i class="bi bi-bookmarks"></i>
             <p>Wiki</p>
@@ -76,6 +79,7 @@
     </div>
 
     <div class="community-apps">
+        <p><b>COMMUNITY APPS</b></p>
         <div class="installed-apps">
             <i class="bi bi-bookmarks"></i>
             <p>Installed Apps</p>
@@ -87,6 +91,7 @@
     </div>
 
     <div class="settings">
+        <p><b>SETTINGS</b></p>
         <div class="general-settings">
             <i class="bi bi-gear"></i>
             <p>General Settings</p>
@@ -95,11 +100,11 @@
             <i class="bi bi-file-post"></i>
             <p>Posts & Comments</p>
         </div>
-        <div class="look-feel">
+        <div class="post-flair">
             <i class="bi bi-brush"></i>
-            <p>Look and Feel</p>
+            <p>Post Flair</p>
         </div>
-        <div class="community-guide">
+        <div class="mod-community-guide">
             <i class="bi bi-bookmarks"></i>
             <p>Community Guide</p>
         </div>
@@ -114,7 +119,8 @@
     </div>
 
     <div class="support">
-        <div class="community">
+        <p><b>SUPPORT</b></p>
+        <div class="for-community">
             <i class="bi bi-reddit"></i>
             <p>Dread For Community</p>
         </div>
@@ -142,5 +148,6 @@
 </div>
 {% endblock sidebar %}
 
-{% block content %}
-{%endblock content %}
+{% block content1 %}
+    {% block mod_content %} {% endblock mod_content %}
+{% endblock content1 %}

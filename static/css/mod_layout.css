@@ -1,0 +1,39 @@
+.mod-side-bar{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+    padding: 10px;
+    border-right: 1px solid lightslategrey;
+}
+
+.mod-side-bar > div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid lightslategrey;
+}
+
+.exit-mod{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.mod-side-bar > div > div{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.mod-side-bar > div > div:hover{
+    background-color: beige;
+    border-radius: 3px;
+}
+
+.bi-reddit{
+    color: orangered;
+}

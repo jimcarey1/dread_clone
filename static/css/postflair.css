@@ -1,0 +1,128 @@
+.post-flair {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+}
+
+.post-flair > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.new-flair{
+    font-size: 20px;
+}
+
+.new-flair button{
+    background-color: blue;
+    color: white;
+    height: 30px;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.bi-toggle-off{
+    font-size: 30px;
+    color: blue;
+    cursor: pointer;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+.new-flair-form{
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.create-flair{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.btn-create-flair{
+    display:flex;
+    gap: 10px;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.btn-create-flair button{
+    background-color: blue;
+    padding: 5px;
+    color: white;
+    border-radius: 15px;
+}
+
+.preview{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.preview-card{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid lightslategrey;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.preview-card .logo{
+    margin-left: 0;
+}
+
+.flair-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.flair-form input{
+    height: 40px;
+    width: 300px;
+    border: 1px solid lightgrey;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.flair-form .color{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.options > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.bi-toggle2-off{
+    font-size: 18px;
+    color: blue;
+}

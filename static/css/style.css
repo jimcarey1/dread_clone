@@ -143,3 +143,7 @@ a{
 .recent-posts p{
     text-align: right;
 }
+
+.bi-reddit{
+    color: orangered;
+}

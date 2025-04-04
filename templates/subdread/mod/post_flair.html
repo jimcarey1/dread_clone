@@ -1,0 +1,110 @@
+{% extends 'subdread/mod/layout.html' %}
+{% block mod_content %}
+<div class="post-flair">
+    <div class="new-flair">
+        <p><b>Post Flair</b></p>
+        <button class="btn-new-flair" onclick="handleCreateNewFlair()">New Flair</button>
+    </div>
+    <div class="display-text">
+        <p>Allow users to add and remove flair from their posts. (Must be turned on for communities that requires post flair.)
+            <br>Want to learn more about post flair and what settings are best for your community ? Visit the Mod Help Center.
+        </p>
+    </div>
+    <div class="enable-post-flair">
+        <div class="enable-post-flair-text">
+            <p>Enable post flair</p>
+            <p>Allow flair in your community.</p>
+        </div>
+        <button class="toggle-enable-post-flair">
+            <i class="bi bi-toggle-off"></i>
+        </button>
+    </div>
+    <div class="allow-users">
+        <div class="allow-users-text">
+            <p>Let users assign and edit.</p>
+            <p>Required for communities that require post flair.</p>
+        </div>
+        <button class="toggle-allow-users">
+            <i class="bi bi-toggle-off"></i>
+        </button>
+    </div>
+    <div class="flair-display-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Flair Preview</th>
+                    <th>Settings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>general</td>
+                    <td>Everyone</td>
+                </tr>
+                <tr>
+                    <td>meetups</td>
+                    <td>Everyone</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="new-flair-form">
+    <div class="create-flair">
+        <strong>Create Flair</strong>
+        <div class="btn-create-flair">
+            <button>Create</button>
+            <i class="bi bi-x-lg"></i>
+        </div>
+    </div>
+
+    <div class="preview">
+        <p>Preview</p>
+        <div class="preview-card">
+            <div class="logo">
+                <i class="bi bi-reddit"></i>
+                <p>r/{{subdread.name}}</p>
+            </div>
+            <strong>Is hot dog a sandwich</strong>
+            <div id="flair-label">
+
+            </div>
+            <p>
+                I would like a solid argument against What I<br>
+                beleive is a fact, hot dogs are sandwiches. Merria...
+            </p>
+        </div>
+        <div class="flair-form">
+            <strong>Setup</strong>
+            <form method="post" autocomplete="off">
+                {% csrf_token %}
+                <input type="text" required />
+            </form>
+            <div class="color">
+                <p>Color</p>
+                <p>none, Dark on Light ></p>
+            </div>
+        </div>
+        <div class="options">
+            <strong>options</strong>
+            <div class="mods-only">
+                <p>For mods only</p>
+                <i class="bi bi-toggle2-off"></i>
+            </div>
+            <div class="allow-users">
+                <p>Allow users to edit</p>
+                <i class="bi bi-toggle2-off"></i>
+            </div>
+            <div class="allow-text">
+                <p>Allow text</p>
+                <i class="bi bi-toggle2-off"></i>
+            </div>
+            <div class="css-classname">
+                <p>CSS classname</p>
+                <i class="bi bi-toggle2-off"></i>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock mod_content %}
