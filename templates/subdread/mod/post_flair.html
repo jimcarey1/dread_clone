@@ -37,24 +37,22 @@
                 </tr>
             </thead>
             <tbody>
+                {% for flair in flairs %}
                 <tr>
-                    <td>general</td>
+                    <td>{{flair.name}}</td>
                     <td>Everyone</td>
                 </tr>
-                <tr>
-                    <td>meetups</td>
-                    <td>Everyone</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
 
-<div class="new-flair-form">
+<div class="new-flair-form" data-community-name="{{subdread.name}}">
     <div class="create-flair">
         <strong>Create Flair</strong>
         <div class="btn-create-flair">
-            <button>Create</button>
+            <button onclick="createFlair()">Create</button>
             <i class="bi bi-x-lg"></i>
         </div>
     </div>
@@ -79,7 +77,7 @@
             <strong>Setup</strong>
             <form method="post" autocomplete="off">
                 {% csrf_token %}
-                <input type="text" required />
+                <input type="text" required onchange="createAndSaveFlair()"/>
             </form>
             <div class="color">
                 <p>Color</p>

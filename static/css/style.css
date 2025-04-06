@@ -76,7 +76,7 @@ a{
 .sidebar{
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 300px;
     gap: 20px;
     margin-top: 20px;
     margin-left: 20px;
@@ -112,6 +112,12 @@ a{
 .create-community:hover{
     background-color: lightslategray;
     border-radius: 5px;
+}
+
+.your-communities{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;   
 }
 
 .resources{

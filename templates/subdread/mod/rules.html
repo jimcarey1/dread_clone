@@ -1,5 +1,24 @@
-{% extends 'subdread/mod/layout.html'}
+{% extends 'subdread/mod/layout.html' %}
 
 {% block mod_content %}
-
+<div class="community-rules">
+    <div class="label">
+        <p>Community Rules</p>
+    </div>
+    <div class="create-rule-btn">
+        <button>Create Rule</button>
+    </div>
+    <div class="rule-display">
+        <div class="headers">
+            <p>NAME</p>
+            <p>CREATED</p>
+        </div>
+        {% for rule in rules %}
+        <div class="rule" id={{subdread.name}}>
+            <p>{{rule.name}}</p>
+            <p>{{rule.created_on|date:"F j, Y"}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock mod_content %}

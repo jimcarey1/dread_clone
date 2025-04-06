@@ -22,8 +22,6 @@ def create_community(request:HttpRequest):
                 description = data.get('description'),
                 type = data.get('type'),
                 adults_only = data.get('adults_only'),
-                banner = data.get('banner'),
-                icon = data.get('icon'),
                 creator = request.user
             )
 

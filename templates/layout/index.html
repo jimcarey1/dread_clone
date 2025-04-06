@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/community_setup.css' %}">
     <link rel="stylesheet" href="{%static 'css/mod_layout.css' %}">
     <link rel="stylesheet" href="{% static 'css/postflair.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rules.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
@@ -73,7 +74,9 @@
                     </div>
                     <div class="your-communities">
                         {% for subreddit in joined_subreddits %}
-                           {{ subreddit.name }}
+                        <div class="{{ subreddit.name }}">
+                            {{ subreddit.name }}
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -126,5 +129,6 @@
     </div>
     <script src="{% static 'js/add_widgets.js' %}"></script>
     <script src="{% static 'js/mod.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
 </body>
 </html>

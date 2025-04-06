@@ -1,0 +1,29 @@
+{% extends 'subdread/mod/layout.html' %}
+
+{% block mod_content %}
+<div class="new-rule" data-community-name={{subdread.name}}>
+    <div class="heading">
+        <div class="label">
+            <i class="bi bi-arrow-left"></i>
+            <p>Name and Describe your rule.</p>
+        </div>
+        <div class="save-button">
+            <button onclick="createNewRule()">Save</button>
+        </div>
+    </div>
+    <div class="label-desc">
+        <p>Rules set the expectations for members and redditors visiting your community.</p>
+    </div>
+    <div class="new-rule-form">
+        <form method="post">
+            {% csrf_token %}
+            <div class="name">
+                <input type="text" placeholder="Rule name" maxlength="100" required />
+            </div>
+            <div class="description">
+                <textarea placeholder="description" maxlength="500" required value=""></textarea>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

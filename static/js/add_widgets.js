@@ -6,7 +6,7 @@ const addwidgethtml = `
             <button class="close-btn" onclick="closeModal()">&times;</button>
         </div>
 
-        <div class="community-details">
+        <div class="community-details-widget">
             <i class="bi bi-pin-angle"></i>
             <div class="community-details-text">
                 <strong>Community details</strong>

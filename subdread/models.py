@@ -28,8 +28,8 @@ class SubDread(models.Model):
     description = models.TextField()
     type = models.CharField(max_length=1, choices=TYPE_CHOICES)
     adults_only = models.BooleanField(default=False, blank=False)
-    banner = models.ImageField(upload_to='banner', default='/banner/default_banner.png', null=True, blank=True)
-    icon = models.ImageField(upload_to='icon', default='/icon/default_icon.png', null=True, blank=True)
+    banner = models.ImageField(upload_to='banner', default='banner/default_banner.png', blank=True)
+    icon = models.ImageField(upload_to='icon', default='icon/default_icon.png', blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     users = models.ManyToManyField(User, related_name='subdreads')
     moderators = models.ManyToManyField(User, related_name='moderated_subdreads')
@@ -45,9 +45,26 @@ class SubDread(models.Model):
 class Flair(models.Model):
     name = models.CharField(max_length=50)
     subdread = models.ForeignKey(SubDread, related_name='flairs', on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'flair'
+        unique_together = ('name', 'subdread')
+
+    def __str__(self):
+        return self.name
+
+    
+class Rule(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(max_length=500)
+    subdread = models.ForeignKey(SubDread, related_name='rules', on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'rules'
         unique_together = ('name', 'subdread')
 
     def __str__(self):
