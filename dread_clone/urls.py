@@ -11,7 +11,7 @@ urlpatterns: List[URLResolver] = [
     path('', home_view, name='home_url'),
     path('accounts/', include('user.urls')),
     path('d/', include('subdread.urls')),
-    path('post/', include('post.urls')),
+    path('d/', include('post.urls')),
 ]
 
 if settings.DEBUG:

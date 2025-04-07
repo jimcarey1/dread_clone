@@ -58,6 +58,11 @@ const createFlair = ()=>{
     }
 }
 
+const redirectToNewRule = ()=>{
+    redirect_url = `${window.location.href}/new`;
+    window.location.href = redirect_url;
+}
+
 const createNewRule = ()=>{
     const ruleName = document.querySelector('.new-rule-form .name input[type="text"]');
     const ruleDescription = document.querySelector('.new-rule-form .description textarea');

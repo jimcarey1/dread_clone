@@ -1,5 +1,5 @@
 from django.http import HttpRequest
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from subdread.models import SubDread
@@ -11,24 +11,29 @@ from .models import Post
 
 @login_required
 def create_post(request:HttpRequest):
-    subdread = SubDread.objects.first()
+    form = PostForm(user=request.user)
+    return render(request, 'post/create_post.html', {'form': form})
+
+@login_required
+def create_post_to_community(request:HttpRequest, subdread:str):
+    subdread:SubDread = get_object_or_404(SubDread, name=subdread)
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, user=request.user, subdread=subdread)
         if form.is_valid():
-
-            data = form.cleaned_data
-            title = data.get('title')
-            content = data.get('content')
-            post = Post(title = title, content = content)
-
-            post.author = request.user
-            post.subdread = subdread
-
+            post = Post(
+                title = form.cleaned_data['title'],
+                content = form.cleaned_data['content'],
+                subdread = form.cleaned_data['subdread'],
+                flair = form.cleaned_data['flairs'],
+                author = request.user,
+            )
             post.save()
-            print(post.__dict__)
-            return redirect('home_url')
-        return render(request, 'post/create_post.html', {'form': form})
+        return redirect('home_url')
     else:
-        form = PostForm()
-        return render(request, 'post/create_post.html', {'form': form})
+        print(subdread.flairs.all())
+        form = PostForm(initial={'subdread':subdread}, user=request.user, subdread=subdread)
+        form.fields['subdread'].disabled = True
+        return render(request, 'post/create_post.html', {'form':form, 'subdread':subdread})
 
+def view_post(request:HttpRequest):
+    pass

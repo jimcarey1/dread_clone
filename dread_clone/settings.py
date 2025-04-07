@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'subdread',
 
     'froala_editor',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -143,5 +144,5 @@ FROALA_EDITOR_PLUGINS = (
     'align', 'colors', 'draggable', 
     'entities', 'font_family', 'font_size', 'fullscreen', 'inline_style',
     'line_breaker', 'link', 'lists', 'paragraph_format', 'paragraph_style', 
-    'quick_insert', 'quote', 'save', 'url'
+    'quote', 'save', 'url'
     )  

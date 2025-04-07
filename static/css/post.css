@@ -1,0 +1,59 @@
+.create-post .label-text{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-post .label-text p{
+    font-size: 24px;
+    font-weight:200;
+}
+
+.create-post .label-text button{
+    padding: 8px;
+    background-color: lightgray;
+    border: none;
+    border-radius: 15px;
+    margin-right: 30px;
+}
+
+.create-post .create-post-form form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.create-post-form form select[name="subdread"]{
+    padding: 8px;
+    background-color: aquamarine;
+    border-radius: 15px;
+}
+
+.create-post-form form input[name="title"]{
+    width: 100%;
+    height: 60px;
+    border-radius: 15px;
+    border: none;
+    background-color: lightgray;
+}
+
+.create-post-form form select[name="flairs"]{
+    padding: 8px;
+    background-color: aquamarine;
+    border-radius: 15px;
+}
+
+.create-post-form form .create-post-btn{
+    display: flex;
+    justify-content: end;
+    margin-right: 30px;
+}
+
+.create-post-form form .create-post-btn button{
+    width: 50px;
+    padding: 7px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 15px;
+}

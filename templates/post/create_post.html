@@ -1,16 +1,58 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Post</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/post.css' %}">
     {{form.media}}
 </head>
 <body>
-    <form method="post" autocomplete="off">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit">Create Post</button>
-    </form>
+    <div class="create-post">
+        <div class="label-text">
+            <p>Create Post</p>
+            <button>Draft</button>
+        </div>
+        <div class="create-post-form">
+            <form method="post">
+                {% csrf_token %}
+                <div class="fieldWrapper">
+                    <select id="subdread-select" name="subdread">
+                        <option value="">-- select --</option>
+                        {% for sd in form.fields.subdread.queryset %}
+                        <option value="{{ sd.name }}" {% if subdread and sd.name == subdread.name %}selected{% endif %}>
+                            {{ sd.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="fieldWrapper">
+                    {{form.title}}
+                </div>
+                <div class="fieldWrapper">
+                    {{form.flairs}}
+                </div>
+                <div class="fieldWrapper">
+                    {{form.content}}
+                </div>
+                <div class="create-post-btn">
+                    <button>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+<script>
+    const subdreadSelect = document.querySelector('select[name="subdread"]');
+    console.log(window.location.href);
+    if (subdreadSelect) {
+        subdreadSelect.addEventListener('change', (e) => {
+            const selected = e.target.value;
+            if (selected) {
+                window.location.href = `/d/${selected}/submit`;
+            }
+        });
+    }
+</script>
 </html>
