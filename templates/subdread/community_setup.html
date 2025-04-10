@@ -14,7 +14,7 @@
         <div class="details">
             <strong>d/{{subdread.name}}</strong>
             <div class="actions">
-                <p>Create Post</p>
+                <a href="{% url 'post_create_community_url' subdread=subdread.name%}">Create Post</a>
                 <p>Mod Tools</p>
             </div>
         </div>
@@ -37,8 +37,8 @@
                             </div>
                         </div>
                         <div class="create-post">
-                            <strong>0/3</strong>
-                            <p>Create</p>
+                            <strong>{{subdread.posts.count}}/3</strong>
+                            <a href="{% url 'post_create_community_url' subdread=subdread.name %}">Create</a>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
             <div class="community-meta-data">
                 <strong>{{subdread.name}}</strong>
                 <p>{{subdread.description}}</p>
-                <p>{{subdread.created_on}}</p>
+                <p>{{subdread.created_on|date:"F j, Y"}}</p>
                 <p>{{subdread.get_type_display}}</p>
                 <div class="community-guide">
                     <i class="bi bi-plus-lg"></i>

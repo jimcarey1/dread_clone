@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,8 +27,17 @@ SECRET_KEY = 'django-insecure-ov&nbi^+$#97+kw@$qbi(e3%r_*bl25xv_$*gcgbxdr*4^%8*4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+# AWS settings
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{os.getenv('AWS_STORAGE_BUCKET_NAME')}.s3.amazonaws.com'
+
+# Optional: make uploaded files publicly accessible
+AWS_DEFAULT_ACL = os.getenv('AWS_DEFAULT_ACL')
 
 # Application definition
 
@@ -121,13 +133,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR/'static']
-STATIC_ROOT = BASE_DIR/'static_collection'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR/'media'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -146,3 +151,30 @@ FROALA_EDITOR_PLUGINS = (
     'line_breaker', 'link', 'lists', 'paragraph_format', 'paragraph_style', 
     'quote', 'save', 'url'
     )  
+
+if DEBUG:
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = [BASE_DIR/'static']
+    STATIC_ROOT = BASE_DIR/'static_collection'
+
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR/'media'
+else:
+    STATIC_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+    STATIC_ROOT = BASE_DIR/'static'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+
+    DEFAULT_FILE_STORAGE = 'myapp.storage_backends.MediaStorage'  # custom storage
+
+    STORAGES = {
+        'default': {
+            'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
+        },
+        'staticfiles': {
+            'BACKEND': 'storages.backends.s3boto3.S3StaticStorage',
+        },
+    }

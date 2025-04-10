@@ -16,6 +16,9 @@ class Post(models.Model):
     class Meta:
         db_table = 'posts'
 
+    def get_comments(self):
+        return self.comments.all()
+
 
 class Comment(models.Model):
     author = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
@@ -26,4 +29,11 @@ class Comment(models.Model):
 
     class Meta:
         db_table = 'comments'
-
+    
+    def get_children(self, id:int):
+        '''
+        This function returns the children
+        of a comment instance.
+        '''
+        comment = Comment.objects.get(id=id)
+        return comment.children.all()

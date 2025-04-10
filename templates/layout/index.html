@@ -25,7 +25,7 @@
             <i class="bi bi-chat-dots"></i>
             <div class="create-post">
                 <i class="bi bi-plus"></i>
-                <p>Create</p>
+                <a href="{% url 'post_create_url' %}">Create</a>
             </div>
             <i class="bi bi-bell"></i>
             <i class="bi bi-person-circle"></i>
@@ -75,7 +75,7 @@
                     <div class="your-communities">
                         {% for subreddit in joined_subreddits %}
                         <div class="{{ subreddit.name }}">
-                            {{ subreddit.name }}
+                            <a href="{% url 'community_setup_url' subdread=subreddit.name %}">{{ subreddit.name }}</a>
                         </div>
                         {% endfor %}
                     </div>

@@ -28,12 +28,12 @@ def create_post_to_community(request:HttpRequest, subdread:str):
                 author = request.user,
             )
             post.save()
-        return redirect('home_url')
+        return redirect('post_view_url', subdread=subdread.name, post_id=post.id)
     else:
-        print(subdread.flairs.all())
         form = PostForm(initial={'subdread':subdread}, user=request.user, subdread=subdread)
         form.fields['subdread'].disabled = True
         return render(request, 'post/create_post.html', {'form':form, 'subdread':subdread})
 
-def view_post(request:HttpRequest):
-    pass
+def view_post(request:HttpRequest, subdread:str, post_id:int):
+    post = get_object_or_404(Post, id=post_id)
+    return render(request, 'post/post_view.html', {'post':post})
