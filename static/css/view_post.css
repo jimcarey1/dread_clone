@@ -1,0 +1,114 @@
+.post-view{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.post-detail{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-detail .post-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.post-detail .menu{
+    margin-right: 20px;
+}
+
+.post-content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post-content .title p{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.post-content .flair p{
+    width: auto;
+    background-color: lightgrey;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.post-actions{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.post-actions > div{
+    display: flex;
+    gap: 10px;
+    background-color: lightslategray;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.add-comment-form form{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-comment-form form .comment-input input{
+    height: 60px;
+    width: 100%;
+    border-radius: 25px;
+    border: none;
+    padding-left: 30px;
+}
+
+.add-comment-form form .action-btn{
+    display: flex;
+    justify-content: end;
+    margin-right: 25px;
+    gap: 25px;
+}
+
+.add-comment-form form .action-btn button.cancel{
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 15px;
+    border: none;
+}
+
+.add-comment-form form .action-btn button.comment{
+    background-color: green;
+    color: white;
+    padding: 5px;
+    border-radius: 15px;
+    border: none;
+}
+
+.post-view .comment-display .comment{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.post-view .comment-display .comment .comment-actions{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-view .comment-display .comment .comment-actions > div{
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 15px;
+}

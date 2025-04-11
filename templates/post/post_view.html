@@ -1,7 +1,88 @@
 {% extends 'layout/index.html' %}
 {% block content1 %}
-<div class="post">
-    {{post.title}}
-    {{post.content|safe}}
+<div class="post-view" data-community-name={{post.subdread.name}} data-post-id="{{post.id}}">
+    <div class="post-detail">
+        <div class="post-info">
+            <i class="bi bi-arrow-left"></i>
+            <div class="owner">
+                <p>d/{{post.subdread.name}}</p>
+                <p>{{post.author.username}}</p>
+            </div>
+        </div>
+        <div class="menu">
+            <i class="bi bi-three-dots"></i>
+        </div>
+    </div>
+    <div class="post-content">
+        <div class="title">
+            <p>{{post.title}}</p>
+        </div>
+        <div class="flair">
+            <p>{{post.flair.name}}</p>
+        </div>
+        <div class="content">
+            {{post.content|safe}}
+        </div>
+    </div>
+    <div class="post-actions">
+        <div class="vote">
+            <i class="bi bi-hand-thumbs-up"></i>
+            <p>23</p>
+            <i class="bi bi-hand-thumbs-down"></i>
+        </div>
+        <div class="reply">
+            <i class="bi bi-chat"></i>
+            <p>10</p>
+        </div>
+        <div class="award">
+            <i class="bi bi-award"></i>
+        </div>
+        <div class="share">
+            <i class="bi bi-share"></i>
+            <p>5</p>
+        </div>
+    </div>
+    <div class="add-comment-form">
+        <form method="post">
+            {% csrf_token %}
+            <div class="comment-input">
+                <input type="text" placeholder="Add a comment" />
+            </div>
+            <div class="action-btn">
+                <button class="cancel">Cancel</button>
+                <button class="comment" onclick="createPostComment()">Comment</button>
+            </div>
+        </form>
+    </div>
+    <div class="comment-display">
+        {% for comment in post.comments.all %}
+        <div class="comment">
+            <div class="author">
+                <b>{{comment.author.username}}</b>
+            </div>
+            <div class="content">
+                <p>{{comment.content|safe}}</p>
+            </div>
+            <div class="comment-actions">
+                <div class="vote">
+                    <i class="bi bi-hand-thumbs-up"></i>
+                    <p>23</p>
+                    <i class="bi bi-hand-thumbs-down"></i>
+                </div>
+                <div class="reply">
+                    <i class="bi bi-chat"></i>
+                    <p>10</p>
+                </div>
+                <div class="award">
+                    <i class="bi bi-award"></i>
+                </div>
+                <div class="share">
+                    <i class="bi bi-share"></i>
+                    <p>5</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content1 %}
