@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ov&nbi^+$#97+kw@$qbi(e3%r_*bl25xv_$*gcgbxdr*4^%8*4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # AWS settings
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
@@ -39,7 +39,6 @@ AWS_S3_CUSTOM_DOMAIN = f'{os.getenv('AWS_STORAGE_BUCKET_NAME')}.s3.amazonaws.com
 # Optional: make uploaded files publicly accessible
 AWS_DEFAULT_ACL = os.getenv('AWS_DEFAULT_ACL')
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',

@@ -1,0 +1,62 @@
+.community-page{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.community-main-content-block{
+    width: 100%;
+    display: flex;
+}
+
+.community-main-content-block .posts-display{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.community-main-content-block .posts-display .post{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    border: 1px solid lightslategray;
+    padding: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.posts-display .post .user-info{
+    color: blue;
+}
+
+.posts-display .post .flair{
+    background-color: lightslategray;
+    padding: 4px;
+    border-radius: 15px;
+}
+
+.community-main-content-block .community-info{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    padding: 20px;
+    border-radius: 20px;
+    gap: 10px;
+}
+
+.community-main-content-block .community-info > div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightslategray;
+}
+
+.community-info .basic-details .stats{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+

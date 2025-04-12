@@ -1,6 +1,112 @@
 {% extends 'layout/index.html' %}
 {% block content1 %}
 <div class="community-page">
-    {{subdread.name}}
+    <div class="community-details">
+        <div class="banner">
+            <img src="{{subdread.banner.url }}" alt="{{subdread.name}}">
+        </div>
+        <div class="icon">
+            <img src="{{subdread.icon.url }}" alt="{{subdread.name}}">
+        </div>
+        <div class="details">
+            <strong>d/{{subdread.name}}</strong>
+            <div class="actions">
+                <a href="{% url 'post_create_community_url' subdread=subdread.name%}">Create Post</a>
+                <p>Mod Tools</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="community-main-content-block">
+        <div class="posts-display">
+            {% for post in subdread.posts.all %}
+            <div class="post" data-url="{% url 'post_view_url' subdread.name post.id %}" onclick="navigateToPost(this)">
+                <div class="user-info">
+                    u/{{post.author.username}}
+                </div>
+                <div class="title">
+                    <b>{{post.title}}</b>
+                </div>
+                <div class="flair">
+                    {{post.flair}}
+                </div>
+                <div class="content">
+                    {{post.content|safe}}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    
+        <div class="community-info">
+            <div class="basic-details">
+                <div class="name">
+                    {{subdread.name}}
+                </div>
+                <div class="description">
+                    {{subdread.description}}
+                </div>
+                <div class="created-date">
+                    <i class="bi bi-cake2"></i>
+                    {{subdread.created_on|date:"F j, Y"}}
+                </div>
+                <div class="type">
+                    {{subdread.get_type_display}}
+                </div>
+                <div class="community-guide">
+                    <p>Community Guide</p>
+                </div>
+                <div class="stats">
+                    <div class="count">
+                        {{subdread.users.count}}
+                    </div>
+                    <div class="online">
+                        0
+                    </div>
+                    <div class="size">
+                        Top 1%
+                    </div>
+                </div>
+            </div>
+            <div class="user-flair">
+                <b>USER FLAIR</b>
+                <p>{{request.user.username}}</p>
+            </div>
+            <div class="rules-display">
+                <b>RULES</b>
+                {% for rule in subdread.rules.all %}
+                <div class="rule">
+                    <div class="name">
+                        {{rule.name}}
+                    </div>
+                    <div class="descriptio">
+                        {{rule.description}}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="filter-by-flairs">
+                <b>FILTER BY POST FLAIRS</b>
+                {% for flair in subdread.flairs.all %}
+                <div class="flair">
+                    {{flair.name}}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="show-moderators">
+                <b>MODERATORS</b>
+                <div class="messages-moderators">
+                    <p>Message Moderators</p>
+                </div>
+                {% for mod in subdread.moderators.all %}
+                <div class="moderator">
+                    {{mod.username}}
+                </div>
+                {% endfor %}
+                <div class="view-moderators">
+                    <b>View Moderators</b>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content1 %}

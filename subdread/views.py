@@ -11,6 +11,10 @@ from .models import SubDread
 
 from utils.community import is_community_setup
 
+def community_home(request:HttpRequest, subdread:str):
+    subdread:SubDread = SubDread.objects.get(name=subdread)
+    return render(request, 'subdread/community_homepage.html', {'subdread':subdread})
+
 # Create your views here.
 @login_required
 def create_community(request:HttpRequest):
@@ -44,8 +48,7 @@ def community_setup(request:HttpRequest, subdread:str):
     subdread:SubDread = SubDread.objects.get(name=subdread)
     if not is_community_setup(subdread):
         return render(request, 'subdread/community_setup.html', {'subdread':subdread})
-    else:
-        return render(request, 'subdread/community_homepage.html', {'subdread':subdread})
+    return redirect('community_homepage_url', subdread=subdread)
 
 def subdread_list(request:HttpRequest):
     subdreads = SubDread.objects.all()
