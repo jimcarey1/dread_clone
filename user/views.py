@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -7,20 +7,15 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import RegistrationForm, LoginForm
 from .models import User
+from post.models import Post
 
 @login_required
 def home_view(request:HttpRequest):
     data: Dict[str, Any] = dict()
     data['joined_subreddits'] = request.user.subdreads.all()
-    try:
-        data['created_subreddit'] = request.user.dread
-    except:
-        pass 
-    finally:
-        return render(
-            request, 
-            'user/index.html', 
-            data)
+    data['created_subreddits'] = request.user.owned_subdreads.all()
+    data['recent_posts'] = Post.objects.order_by('-created_on')[:3]
+    return render(request, 'user/index.html', {'data':data})
 
 
 def registration_view(request:HttpRequest):
@@ -59,3 +54,8 @@ def logout_view(request:HttpRequest):
 def profile_view(request:HttpRequest):
     user = request.user
     return render(request, 'user/profile.html', {'user':user})
+
+
+def user_profile_view(request:HttpRequest, username:str):
+    user = get_object_or_404(User, username=username)
+    return render(request, 'user/profile.html' ,{'user':user})

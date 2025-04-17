@@ -24,6 +24,12 @@
             <input type="text" placeholder="Search Dread">
         </div>
         <div class="button-menu">
+            {% if request.user.is_authenticated %}
+            <form method="post" action="accounts/logout/">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+            {% endif %}
             <i class="bi bi-chat-dots"></i>
             <div class="create-post">
                 <i class="bi bi-plus"></i>
@@ -75,7 +81,7 @@
                         </form>
                     </div>
                     <div class="your-communities">
-                        {% for subreddit in joined_subreddits %}
+                        {% for subreddit in data.joined_subreddits %}
                         <div class="{{ subreddit.name }}">
                             <a href="{% url 'community_setup_url' subdread=subreddit.name %}">{{ subreddit.name }}</a>
                         </div>

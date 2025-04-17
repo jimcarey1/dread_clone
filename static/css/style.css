@@ -144,7 +144,24 @@ a{
     flex-direction: column;
     border-right: 1px solid right;
     gap: 30px;
-    text-align: center;
+}
+
+.post-list .post{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: lightgray;
+    justify-content: start;
+    align-items: self-start;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.post-list .post .flair{
+    background-color: white;
+    padding: 7px;
+    border-radius: 10px;
 }
 
 .recent-posts{

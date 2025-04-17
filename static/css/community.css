@@ -60,3 +60,8 @@
     align-items: center;
 }
 
+.details .join-status{
+    background-color: lightgreen;
+    padding: 5px;
+    border-radius: 5px;
+}

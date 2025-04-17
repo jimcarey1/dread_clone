@@ -11,6 +11,21 @@
         <div class="details">
             <strong>d/{{subdread.name}}</strong>
             <div class="actions">
+                {% if subdread in request.user.subdreads.all %}
+                <div class="join-status">
+                    <form method="post" action="leave/">
+                        {% csrf_token %}
+                        <button type="submit">Joined</button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="join-status">
+                    <form method="post" action="join/">
+                        {% csrf_token %}
+                        <button type="submit">Join</button>
+                    </form>
+                </div>
+                {% endif %}
                 <a href="{% url 'post_create_community_url' subdread=subdread.name%}">Create Post</a>
                 <p>Mod Tools</p>
             </div>

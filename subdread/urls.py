@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import create_community, community_setup, community_home
+from .views import create_community, community_setup, community_home, join_subdread, leave_subdread
 from .views_mod_setup import mod_tools, post_flair, rules, create_new_rule
 
 urlpatterns = [
@@ -11,4 +11,6 @@ urlpatterns = [
     path('mod/<str:subdread>/postflair', post_flair, name='community_post_flair'),
     path('mod/<str:subdread>/rules', rules, name='community_mod_rules'),
     path('mod/<str:subdread>/rules/new', create_new_rule, name='community_mod_create_new_rule'),
+    path('<str:subdread>/join/', join_subdread, name='community_join_url'),
+    path('<str:subdread>/leave/', leave_subdread, name='community_leave_url'),
 ]

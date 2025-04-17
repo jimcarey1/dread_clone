@@ -65,18 +65,18 @@ def subdread_detail(request:HttpRequest, subdread_id:int):
         'is_member': is_member})
 
 @login_required
-def join_subdread(request:HttpRequest, subdread_id:int):
-    subdread = get_object_or_404(SubDread, id=subdread_id)
+def join_subdread(request:HttpRequest, subdread:str):
+    subdread = get_object_or_404(SubDread, name=subdread)
     if request.user not in subdread.users.all():
         subdread.users.add(request.user)
-    return redirect('subdread_detail', subdread_id=subdread_id)
+    return redirect('community_homepage_url', subdread=subdread)
 
 @login_required
-def leave_subdread(request:HttpRequest, subdread_id:int):
-    subdread = get_object_or_404(SubDread, id=subdread_id)
+def leave_subdread(request:HttpRequest, subdread:str):
+    subdread = get_object_or_404(SubDread, name=subdread)
     if request.user in subdread.users.all():
         subdread.users.remove(request.user)
-    return redirect('subdread_detail', subdread_id=subdread_id)
+    return redirect('community_homepage_url', subdread=subdread)
 
 def delete_subdread(request:HttpRequest, subdread_id:int):
     subdread = get_object_or_404(SubDread, id=subdread_id)
