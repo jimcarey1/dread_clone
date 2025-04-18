@@ -41,6 +41,7 @@ AWS_DEFAULT_ACL = os.getenv('AWS_DEFAULT_ACL')
 
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'user',
     'post',
     'subdread',
+    'chat',
 
     'froala_editor',
     'storages',
@@ -177,3 +179,14 @@ else:
             'BACKEND': 'storages.backends.s3boto3.S3StaticStorage',
         },
     }
+
+ASGI_APPLICATION = "dread_clone.asgi.application"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        },
+    },
+}

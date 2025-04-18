@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:7.4
+    ports:
+      - "6379:6379"
+    networks:
+      - chatnet
+
+  django:
+    build: .
+    command: daphne -b 0.0.0.0 -p 8000 dread_clone.asgi:application
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    networks:
+      - chatnet
+
+networks:
+  chatnet:
+    driver: bridge

@@ -12,6 +12,7 @@ urlpatterns: List[URLResolver] = [
     path('accounts/', include('user.urls')),
     path('d/', include('subdread.urls')),
     path('d/', include('post.urls')),
+    path('chat/', include('chat.urls')),
 ]
 
 if settings.DEBUG:
