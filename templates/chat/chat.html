@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chat with {{ username }}</title>
+    <title>chat</title>
 </head>
 <body>
-    <h1>Chat with {{ username }}</h1>
-    <div id="chat-log"></div>
+    <div id="chat-log">
+        {% for message in messages %}
+            <div class="message">
+                <div class="author">{{message.sender.username}}</div>
+                <div class="content">{{message.message}}</div>
+            </div>
+        {% endfor %}
+    </div>
     <input id="chat-message-input" type="text" size="100">
     <button id="chat-message-submit">Send</button>
 
@@ -18,7 +24,9 @@
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').innerHTML += '<b>' + data.sender + ':</b> ' + data.message + '<br>';
+            const message_element = `<div class="message"><div class="author">${data.sender}</div><div class="content">${data.message}</div></div>`;
+            const chat_log = document.querySelector('#chat-log')
+            chat_log.insertAdjacentHTML('beforeend', message_element);
         };
 
         chatSocket.onclose = function(e) {

@@ -12,3 +12,5 @@ class Chat(models.Model):
     class Meta:
         db_table = 'chat_messages'
 
+    def __str__(self):
+        return self.message
