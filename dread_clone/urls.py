@@ -9,10 +9,11 @@ from user.views import home_view
 urlpatterns: List[URLResolver] = [ 
     path('admin/', admin.site.urls),
     path('', home_view, name='home_url'),
-    path('accounts/', include('user.urls')),
-    path('d/', include('subdread.urls')),
+    path('user/', include('user.urls')),
     path('d/', include('post.urls')),
+    path('d/', include('subdread.urls')),
     path('chat/', include('chat.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:

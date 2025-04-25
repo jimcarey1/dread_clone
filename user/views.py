@@ -22,7 +22,7 @@ def registration_view(request:HttpRequest):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = User(username=form.cleaned_data.get('username'))
+            user = User(username=form.cleaned_data.get('username'), email=form.cleaned_data.get('email'))
             user.set_password(form.cleaned_data.get('password'))
             user.save()
             return redirect('user_login_url')

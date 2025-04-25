@@ -34,6 +34,7 @@ class PostForm(forms.ModelForm):
         subdread = kwargs.pop('subdread', None) 
         super().__init__(*args, **kwargs)
         if user is not None:
+            print(user.subdreads.all())
             self.fields['subdread'].queryset = user.subdreads.all()
 
         if subdread is not None:

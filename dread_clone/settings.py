@@ -56,6 +56,19 @@ INSTALLED_APPS = [
 
     'froala_editor',
     'storages',
+
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +79,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'dread_clone.urls'
@@ -141,10 +156,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.User'
 
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = None
 
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/user/login/'
 
 FROALA_EDITOR_PLUGINS = (
     'align', 'colors', 'draggable', 
@@ -193,3 +208,21 @@ CHANNEL_LAYERS = {
     #     },
     # },
 }
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': os.getenv('CLIENT_ID'),
+            'secret': os.getenv('CLIENT_SECRET'),
+            'key': ''
+        }
+    }
+}
+
+SITE_ID = 1
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']  
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_ADAPTER = 'user.adapters.CustomAccountAdapter'

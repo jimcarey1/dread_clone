@@ -11,6 +11,11 @@ class RegistrationForm(forms.Form):
         min_length=6, 
         strip=True,
         help_text='Username should be unique.')
+    
+    email = forms.EmailField(
+        help_text='Enter a valid email address.',
+        required=True
+    )
     password = forms.CharField(
         min_length=8, 
         strip=True, 
@@ -22,6 +27,12 @@ class RegistrationForm(forms.Form):
         widget=forms.PasswordInput,
         help_text='Re-enter the password'
     )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise ValidationError('Email already exists.')
+        return email
 
     def clean(self):
         cleaned_data = super().clean()

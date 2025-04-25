@@ -12,6 +12,7 @@ from .models import Post
 @login_required
 def create_post(request:HttpRequest):
     form = PostForm(user=request.user)
+    print(form.fields)
     return render(request, 'post/create_post.html', {'form': form})
 
 @login_required

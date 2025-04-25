@@ -1,14 +1,42 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Login</title>
-    </head>
-    <body>
-        <h2>Login</h2>
-        <form action="" method="post" autocomplete="off">
-            {% csrf_token %}
-            {{ form }}
-            <button type="submit">Login</button>
-        </form>
-    </body>
-</html>
+{% load socialaccount %}
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    
+    <div>
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {{ form.username.errors }}
+        <small>{{ form.username.help_text }}</small>
+    </div>
+
+    <div>
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {{ form.email.errors }}
+        <small>{{ form.email.help_text }}</small>
+    </div>
+
+    <div>
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        {{ form.password.errors }}
+        <small>{{ form.password.help_text }}</small>
+    </div>
+
+    <div>
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+        <small>{{ form.password2.help_text }}</small>
+    </div>
+
+    <button type="submit">Register</button>
+</form>
+
+<hr>
+
+<p>Or register with:</p>
+<a href="{% provider_login_url 'google' method='oauth2' %}">
+    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Login with Google">
+</a>

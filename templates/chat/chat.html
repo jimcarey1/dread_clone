@@ -4,17 +4,25 @@
     <title>chat</title>
 </head>
 <body>
-    <div id="chat-log">
-        {% for message in messages %}
-            <div class="message">
-                <div class="author">{{message.sender.username}}</div>
-                <div class="content">{{message.message}}</div>
+    <div class="chat-page">
+        <div class="recent-chats">
+            {% for chat in request.user.chatted_with.all %}
+            <div class="recents">
+              <div>{{chat.username}}</div>  
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+        <div id="chat-log">
+            {% for message in messages %}
+                <div class="message">
+                    <div class="author">{{message.sender.username}}</div>
+                    <div class="content">{{message.message}}</div>
+                </div>
+            {% endfor %}
+        </div>
+        <input id="chat-message-input" type="text" size="100">
+        <button id="chat-message-submit">Send</button>
     </div>
-    <input id="chat-message-input" type="text" size="100">
-    <button id="chat-message-submit">Send</button>
-
     <script>
         const username = "{{ username }}";
         console.log(username)
