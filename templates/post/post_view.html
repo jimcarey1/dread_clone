@@ -5,8 +5,8 @@
         <div class="post-info">
             <i class="bi bi-arrow-left"></i>
             <div class="owner">
-                <p>d/{{post.subdread.name}}</p>
-                <p>{{post.author.username}}</p>
+                <a href="{% url 'community_homepage_url' subdread=post.subdread.name %}"><p>d/{{post.subdread.name}}</p></a>
+                <a href="{% url 'other_user_profile_url' username=post.author.username %}"><p>{{post.author.username}}</p></a>
             </div>
         </div>
         <div class="menu">

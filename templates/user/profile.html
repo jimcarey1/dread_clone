@@ -1,1 +1,4 @@
 {{ user.username }}
+{% if request.user.username != user.username  %}
+<a href="{% url 'chat' base32_username=base32_username %}">Chat with {{user.username}}</a>
+{% endif %}

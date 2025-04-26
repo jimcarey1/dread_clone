@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, LoginForm
 from .models import User
 from post.models import Post
+from utils.chat import to_base32
 
 @login_required
 def home_view(request:HttpRequest):
@@ -57,5 +58,6 @@ def profile_view(request:HttpRequest):
 
 
 def user_profile_view(request:HttpRequest, username:str):
+    base32_username = to_base32(username)
     user = get_object_or_404(User, username=username)
-    return render(request, 'user/profile.html' ,{'user':user})
+    return render(request, 'user/profile.html' ,{'user':user, 'base32_username':base32_username})

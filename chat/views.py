@@ -4,9 +4,11 @@ from django.db.models import Q
 
 from user.models import User 
 from .models import Chat
+from utils.chat import base32_to_original
 
 @login_required
-def chat_view(request, username):
+def chat_view(request, base32_username:str):
+    username = base32_to_original(base32_username)
     sender = request.user
     receiver = get_object_or_404(User, username=username)
     messages = Chat.objects.filter(

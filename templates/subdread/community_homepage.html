@@ -37,7 +37,7 @@
             {% for post in subdread.posts.all %}
             <div class="post" data-url="{% url 'post_view_url' subdread.name post.id %}" onclick="navigateToPost(this)">
                 <div class="user-info">
-                    u/{{post.author.username}}
+                    <a href="{% url 'other_user_profile_url' username=post.author.username %}">u/{{post.author.username}}</a>
                 </div>
                 <div class="title">
                     <b>{{post.title}}</b>
