@@ -15,4 +15,4 @@ def chat_view(request, base32_username:str):
         Q(sender=sender, recipient=receiver) |
         Q(sender=receiver, recipient=sender)
     ).order_by('sent_on')
-    return render(request, 'chat/chat.html', {'messages':messages, 'username':username})
+    return render(request, 'chat/chat.html', {'messages':messages, 'username':username, 'receiver':receiver})

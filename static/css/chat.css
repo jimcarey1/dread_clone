@@ -1,0 +1,47 @@
+.chat-page{
+    display: flex;
+    gap: 20px;
+}
+
+.recent-chats{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.chatbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.recent-users-chats{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.recents{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.recents img{
+    width: 30px;
+    height: 30px;
+}
+
+.main-chat-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
