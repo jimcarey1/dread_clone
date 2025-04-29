@@ -4,6 +4,8 @@ from django.urls import URLResolver, path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from allauth.account.views import ConfirmEmailView, EmailVerificationSentView
+
 from user.views import home_view
 
 urlpatterns: List[URLResolver] = [ 

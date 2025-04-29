@@ -5,12 +5,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-from .forms import RegistrationForm, LoginForm
+from allauth.account.decorators import verified_email_required
+
 from .models import User
 from post.models import Post
 from utils.chat import to_base32
 
 @login_required
+@verified_email_required
 def home_view(request:HttpRequest):
     data: Dict[str, Any] = dict()
     data['joined_subreddits'] = request.user.subdreads.all()
@@ -19,32 +21,33 @@ def home_view(request:HttpRequest):
     return render(request, 'user/index.html', {'data':data})
 
 
-def registration_view(request:HttpRequest):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            user = User(username=form.cleaned_data.get('username'), email=form.cleaned_data.get('email'))
-            user.set_password(form.cleaned_data.get('password'))
-            user.save()
-            return redirect('user_login_url')
-        return render(request, 'user/registration.html', {'form':form})
-    else:
-        form = RegistrationForm()
-        return render(request, 'user/registration.html', {'form':form})
-    
-def login_view(request:HttpRequest):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(request, username=form.cleaned_data.get('username'), password=form.cleaned_data.get('password'))
-            if user is not None:
-                login(request, user)
-                next_url = request.GET.get('next') or request.POST.get('next') or '/'
-                return redirect(next_url)
-        return render(request, 'user/login.html', {'form':form})
-    else:
-        form = LoginForm()
-        return render(request, 'user/login.html', {'form':form})
+# def registration_view(request:HttpRequest):
+#     if request.method == 'POST':
+#         form = RegistrationForm(request.POST)
+#         if form.is_valid():
+#             user = User(username=form.cleaned_data.get('username'), email=form.cleaned_data.get('email'))
+#             user.set_password(form.cleaned_data.get('password'))
+#             user.is_active = False
+#             user.save()
+#             return redirect('user_login_url')
+#         return render(request, 'user/registration.html', {'form':form})
+#     else:
+#         form = RegistrationForm()
+#         return render(request, 'user/registration.html', {'form':form})
+
+# def login_view(request:HttpRequest):
+#     if request.method == 'POST':
+#         form = LoginForm(request.POST)
+#         if form.is_valid():
+#             user = authenticate(request, username=form.cleaned_data.get('username'), password=form.cleaned_data.get('password'))
+#             if user is not None:
+#                 login(request, user)
+#                 next_url = request.GET.get('next') or request.POST.get('next') or '/'
+#                 return redirect(next_url)
+#         return render(request, 'user/login.html', {'form':form})
+#     else:
+#         form = LoginForm()
+#         return render(request, 'user/login.html', {'form':form})
 
 @login_required
 def logout_view(request:HttpRequest):
