@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ov&nbi^+$#97+kw@$qbi(e3%r_*bl25xv_$*gcgbxdr*4^%8*4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -178,22 +178,35 @@ if DEBUG:
 else:
     STATIC_LOCATION = 'static'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-    STATIC_ROOT = BASE_DIR/'static'
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_DIRS = [BASE_DIR/'static']
+    STATICFILES_STORAGE = 'dread_clone.storage_backends.StaticStorage'
 
     MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
 
-    DEFAULT_FILE_STORAGE = 'myapp.storage_backends.MediaStorage'  # custom storage
+    DEFAULT_FILE_STORAGE = 'dread_clone.storage_backends.MediaStorage'  # custom storage
 
     STORAGES = {
         'default': {
             'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
+            'OPTIONS': {
+                'bucket_name': AWS_STORAGE_BUCKET_NAME,
+                'region_name': AWS_S3_REGION_NAME,
+                'default_acl': AWS_DEFAULT_ACL,
+                'location': 'media',
+            },
         },
         'staticfiles': {
-            'BACKEND': 'storages.backends.s3boto3.S3StaticStorage',
+            'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
+            'OPTIONS': {
+                'bucket_name': AWS_STORAGE_BUCKET_NAME,
+                'region_name': AWS_S3_REGION_NAME,
+                'default_acl': AWS_DEFAULT_ACL,
+                'location': 'static',
+            },
         },
     }
+
 
 ASGI_APPLICATION = "dread_clone.asgi.application"
 
