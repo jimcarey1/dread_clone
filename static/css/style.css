@@ -71,6 +71,7 @@ a{
     margin-top: 20px;
     display: flex;
     gap: 50px;
+    margin-right: 20px;
 }
 
 .page-layout > div{
@@ -139,7 +140,7 @@ a{
 }
 
 .post-list{
-    width: 800px;
+    width: 850px;
     display: flex;
     flex-direction: column;
     border-right: 1px solid right;
@@ -174,4 +175,29 @@ a{
 
 .bi-reddit{
     color: orangered;
+}
+
+.recent-posts{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.recent-posts-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items:self-start;
+    gap: 20px;
+}
+
+.recent-post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid;
+    border-radius: 20px;
 }

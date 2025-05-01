@@ -28,6 +28,33 @@
 
 {% block content2 %}
 <div class="recent-posts">
-    <p>It will display recent-posts</p>
+    <h3>Recently Viewed Posts</h3>
+    <div class="recent-posts-list">
+        <!-- JS will insert posts here -->
+    </div>
 </div>
-{% endblock %}
+
+<script>
+        const recentPostsContainer = document.querySelector('.recent-posts-list');
+        const recentPosts = localStorage.getItem('recentPosts') ? JSON.parse(localStorage.getItem('recentPosts')) : [];
+        console.log(recentPosts);
+
+
+        if (recentPosts.length === 0) {
+            recentPostsContainer.innerHTML = '<p>No recent posts.</p>';
+        }else{
+            recentPosts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.classList.add('recent-post');
+
+            // You can adjust the structure here as needed
+            postElement.innerHTML = `
+                <b class='title'>${post.postTitle}</b>
+                <p class='content'>${post.postBody.slice(0, 75)}...</p>
+                <a href="/posts/${post.postId}">Read more</a>
+            `;
+            recentPostsContainer.appendChild(postElement);
+            })
+        }
+</script>
+{% endblock content2 %}

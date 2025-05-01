@@ -84,5 +84,102 @@
         </div>
         {% endfor %}
     </div>
+    <script>
+        const postId = document.querySelector('.post-view').dataset.postId;
+        const postTitle = document.querySelector('.post-view .post-content .title p').textContent;
+        const postBody = document.querySelector('.post-view .post-content .content').textContent;
+    
+        let recentPosts = localStorage.getItem('recentPosts') 
+            ? JSON.parse(localStorage.getItem('recentPosts')) 
+            : [];
+        const alreadyExists = recentPosts.some(post => post.postId === postId);
+    
+        if (!alreadyExists) {
+            recentPosts.push({ postId, postTitle, postBody });
+
+            if (recentPosts.length > 5) {
+                recentPosts.shift(); // remove the oldest post
+            }
+            localStorage.setItem('recentPosts', JSON.stringify(recentPosts));
+        }else{
+            const index = recentPosts.findIndex(post => post.postId === postId);
+            recentPosts.splice(index, 1); // remove old
+            recentPosts.push({ postId, postTitle, postBody });
+            localStorage.setItem('recentPosts', JSON.stringify(recentPosts));
+        }
+    </script>
 </div>
 {% endblock content1 %}
+
+{% block content2 %}
+<div class="community-info">
+    <div class="basic-details">
+        <div class="name">
+            {{subdread.name}}
+        </div>
+        <div class="description">
+            {{subdread.description}}
+        </div>
+        <div class="created-date">
+            <i class="bi bi-cake2"></i>
+            {{subdread.created_on|date:"F j, Y"}}
+        </div>
+        <div class="type">
+            {{subdread.get_type_display}}
+        </div>
+        <div class="community-guide">
+            <p>Community Guide</p>
+        </div>
+        <div class="stats">
+            <div class="count">
+                {{subdread.users.count}}
+            </div>
+            <div class="online">
+                0
+            </div>
+            <div class="size">
+                Top 1%
+            </div>
+        </div>
+    </div>
+    <div class="user-flair">
+        <b>USER FLAIR</b>
+        <p>{{request.user.username}}</p>
+    </div>
+    <div class="rules-display">
+        <b>RULES</b>
+        {% for rule in subdread.rules.all %}
+        <div class="rule">
+            <div class="name">
+                {{rule.name}}
+            </div>
+            <div class="descriptio">
+                {{rule.description}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="filter-by-flairs">
+        <b>FILTER BY POST FLAIRS</b>
+        {% for flair in subdread.flairs.all %}
+        <div class="flair">
+            {{flair.name}}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="show-moderators">
+        <b>MODERATORS</b>
+        <div class="messages-moderators">
+            <p>Message Moderators</p>
+        </div>
+        {% for mod in subdread.moderators.all %}
+        <div class="moderator">
+            {{mod.username}}
+        </div>
+        {% endfor %}
+        <div class="view-moderators">
+            <b>View Moderators</b>
+        </div>
+    </div>
+</div>
+{% endblock content2 %}

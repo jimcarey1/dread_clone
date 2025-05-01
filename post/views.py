@@ -37,4 +37,5 @@ def create_post_to_community(request:HttpRequest, subdread:str):
 
 def view_post(request:HttpRequest, subdread:str, post_id:int):
     post = get_object_or_404(Post, id=post_id)
-    return render(request, 'post/post_view.html', {'post':post})
+    subdread = get_object_or_404(SubDread, name=subdread)
+    return render(request, 'post/post_view.html', {'post':post, 'subdread':subdread})
